@@ -1,32 +1,68 @@
 package com.revature.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
-public class Meal {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-	private int id;
+@Entity
+@Table(name = "meal", schema = "fitbuddy")
+public class Meal implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
+	private int meal_id;
+	
+	@Column
 	private LocalDateTime date;
+	
+	@Column
 	private String type;
-	private int user_id;
+	
+	@ManyToOne
+	@JoinColumn(name = "id")
+	private User user;
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+			name = "meal_food", 
+			schema = "fitbuddy",
+			joinColumns = { @JoinColumn(name = "meal_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "food_id") })
+	private Set<Food> foods;
 	
 	public Meal() {
 		super();
 	}
 
-	public Meal(int id, LocalDateTime date, String type, int user_id) {
+	public Meal(int meal_id, LocalDateTime date, String type, User user) {
 		super();
-		this.id = id;
+		this.meal_id = meal_id;
 		this.date = date;
 		this.type = type;
-		this.user_id = user_id;
+		this.user = user;
 	}
 
 	public int getId() {
-		return id;
+		return meal_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int meal_id) {
+		this.meal_id = meal_id;
 	}
 
 	public LocalDateTime getDate() {
@@ -45,12 +81,12 @@ public class Meal {
 		this.type = type;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -58,9 +94,10 @@ public class Meal {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((foods == null) ? 0 : foods.hashCode());
+		result = prime * result + meal_id;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + user_id;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -78,21 +115,29 @@ public class Meal {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (id != other.id)
+		if (foods == null) {
+			if (other.foods != null)
+				return false;
+		} else if (!foods.equals(other.foods))
+			return false;
+		if (meal_id != other.meal_id)
 			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (user_id != other.user_id)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Meal [id=" + id + ", date=" + date + ", type=" + type + ", user_id=" + user_id + "]";
+		return "Meal [meal_id=" + meal_id + ", date=" + date + ", type=" + type + ", user=" + user + ", foods=" + foods + "]";
 	}
 	
 }

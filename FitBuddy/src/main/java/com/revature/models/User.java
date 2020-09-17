@@ -1,14 +1,46 @@
 package com.revature.models;
 
-public class User {
+import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users", schema = "fitbuddy")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(unique = true, nullable = false)
 	private String username;
+	
+	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable = false)
 	private String firstname;
+	
+	@Column(nullable = false)
 	private String lastname;
+	
+	@Column(nullable = false)
 	private String email;
+	
+	@Column
 	private int goal;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<Meal> meals;
 	
 	public User() {
 		super();

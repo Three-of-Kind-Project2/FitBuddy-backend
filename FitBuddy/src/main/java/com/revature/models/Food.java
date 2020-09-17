@@ -1,22 +1,55 @@
 package com.revature.models;
 
-public class Food {
+import java.io.Serializable;
+import java.util.Set;
 
-	private int id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "food", schema = "fitbuddy")
+public class Food implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
+	private int food_id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private String url;
+	
+	@Column
 	private int calories;
+	
+	@Column
 	private int carbs;
+	
+	@Column
 	private int protein;
+	
+	@Column
 	private int fat;
+	
+	@ManyToMany(mappedBy = "foods")
+	private Set<Meal> meals;
 	
 	public Food() {
 		super();
 	}
 
-	public Food(int id, String name, String url, int calories, int carbs, int protein, int fat) {
+	public Food(int food_id, String name, String url, int calories, int carbs, int protein, int fat) {
 		super();
-		this.id = id;
+		this.food_id = food_id;
 		this.name = name;
 		this.url = url;
 		this.calories = calories;
@@ -26,11 +59,11 @@ public class Food {
 	}
 
 	public int getId() {
-		return id;
+		return food_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int food_id) {
+		this.food_id = food_id;
 	}
 
 	public String getName() {
@@ -88,7 +121,7 @@ public class Food {
 		result = prime * result + calories;
 		result = prime * result + carbs;
 		result = prime * result + fat;
-		result = prime * result + id;
+		result = prime * result + food_id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + protein;
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -110,7 +143,7 @@ public class Food {
 			return false;
 		if (fat != other.fat)
 			return false;
-		if (id != other.id)
+		if (food_id != other.food_id)
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -129,7 +162,7 @@ public class Food {
 
 	@Override
 	public String toString() {
-		return "Food [id=" + id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs=" + carbs
+		return "Food [food_id=" + food_id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs=" + carbs
 				+ ", protein=" + protein + ", fat=" + fat + "]";
 	}
 	
