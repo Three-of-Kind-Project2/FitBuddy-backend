@@ -3,6 +3,7 @@
 *.settings
 */log.txt
 target/
+FitBuddy/target/
 bin/
 
 # Compiled class file
