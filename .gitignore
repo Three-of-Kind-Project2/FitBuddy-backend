@@ -2,6 +2,7 @@
 *.project
 *.settings
 */log.txt
+*.factorypath
 target/
 FitBuddy/target/
 bin/
