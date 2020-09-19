@@ -34,4 +34,22 @@ public class UserService {
 		
 		return userDao.findByUsername(username);
 	}
+	
+	public boolean register(User u) {
+		userDao = ac.getBean(IUserDAO.class);
+		//TODO: hash password before insertion
+		return userDao.insert(u);
+	}
+	
+	public boolean update(User u) {
+		userDao = ac.getBean(IUserDAO.class);
+		
+		return userDao.update(u);
+	}
+	
+	public void delete(User u) {
+		userDao = ac.getBean(IUserDAO.class);
+		
+		userDao.delete(u);
+	}
 }

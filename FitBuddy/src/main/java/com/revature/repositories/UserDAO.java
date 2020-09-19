@@ -3,7 +3,11 @@ package com.revature.repositories;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,26 +46,62 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		
+		CriteriaBuilder builder = s.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
+		Root<User> root = query.from(User.class);
+		
+		Predicate restriction = builder.and(builder.like(root.get("username"), username));
+		query.select(root).where(restriction);
+		TypedQuery<User> u = s.createQuery(query);
+		
+		tx.commit();
+		
+		return u.getSingleResult();
 	}
 
 	@Override
-	public int insert(User u) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(User u) {
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		
+		int id = (int) s.save(u);
+		
+		if (id != 0) {
+			tx.commit();
+			return true;
+		}
+		
+		tx.rollback();
+		return false;
 	}
 
 	@Override
 	public boolean update(User u) {
-		// TODO Auto-generated method stub
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		
+		User updated = (User) s.merge(u);
+		
+		if (updated.equals(u)) {
+			tx.commit();
+			return true;
+		}
+		
+		tx.rollback();
 		return false;
 	}
 
 	@Override
-	public boolean delete(User u) {
-		// TODO Auto-generated method stub
-		return false;
+	public void delete(User u) {
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		
+		s.delete(u);
+		
+		tx.commit();
 	}
 
 }
