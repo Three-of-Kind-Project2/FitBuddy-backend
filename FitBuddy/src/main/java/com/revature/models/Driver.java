@@ -3,6 +3,7 @@ package com.revature.models;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.revature.services.UserService;
 import com.revature.util.HibernateUtil;
 
 public class Driver {
@@ -16,6 +17,11 @@ public class Driver {
 		s.save(test);
 		
 		tx.commit();
+		
+		UserService userServ = new UserService();
+		
+		System.out.println(userServ.getAllUsers());
+		
 	}
 
 }
