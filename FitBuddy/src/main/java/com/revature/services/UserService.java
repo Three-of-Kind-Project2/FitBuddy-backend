@@ -22,4 +22,16 @@ public class UserService {
 		
 		return userDao.allUsers();
 	}
+	
+	public User findUser(int id) {
+		userDao = ac.getBean(IUserDAO.class);
+		
+		return userDao.findById(id);
+	}
+	
+	public User findUser(String username) {
+		userDao = ac.getBean(IUserDAO.class);
+		
+		return userDao.findByUsername(username);
+	}
 }

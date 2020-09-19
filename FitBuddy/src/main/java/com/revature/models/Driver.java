@@ -22,6 +22,8 @@ public class Driver {
 		
 		System.out.println(userServ.getAllUsers());
 		
+		System.out.println(userServ.findUser(1));
+		
 	}
 
 }
