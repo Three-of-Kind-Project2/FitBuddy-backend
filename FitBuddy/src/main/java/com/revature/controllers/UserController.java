@@ -13,14 +13,14 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 
 @RestController
-@RequestMapping("about")
+@RequestMapping("users")
 @CrossOrigin("http://localhost:4200")
 public class UserController {
 	
 	@Autowired
 	UserService userServ;
 	
-	@GetMapping("/getusers")
+	@GetMapping
 	public ResponseEntity<List<User> > allUsers() {
 		return ResponseEntity.ok(this.userServ.getAllUsers());
 	}
