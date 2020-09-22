@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "meal", schema = "fitbuddy")
 public class Meal implements Serializable {
@@ -32,10 +35,12 @@ public class Meal implements Serializable {
 	@Column
 	private String type;
 	
+	@JsonBackReference("meal-user")
 	@ManyToOne
 	@JoinColumn(name = "id")
 	private User user;
 	
+	@JsonManagedReference("meal-food")
 	@OneToMany(mappedBy = "meal", fetch = FetchType.EAGER)
 	private Set<Food> foods;
 	

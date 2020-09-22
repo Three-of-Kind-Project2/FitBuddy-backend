@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users", schema = "fitbuddy")
 public class User implements Serializable {
@@ -39,6 +41,7 @@ public class User implements Serializable {
 	@Column
 	private int goal;
 	
+	@JsonManagedReference("meal-user")
 	@OneToMany(mappedBy = "user")
 	private Set<Meal> meals;
 	
