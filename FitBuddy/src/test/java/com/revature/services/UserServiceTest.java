@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -31,10 +32,10 @@ public class UserServiceTest {
 		when(userDao.insert(test)).thenReturn(1);
 		when(userDao.update(test)).thenReturn(new User(1, "test", "test", "Test", "Test", "test@mail.com", 2000));
 		
-		test.setId(1);
 		User registered = userServ.register(test);
 		
-		assertEquals(registered, test);
+		assertEquals(registered.getId(), 1);
+		assertNotEquals(registered.getPassword(), "test");
 	}
 
 }
