@@ -37,16 +37,22 @@ public class UserService {
 		return userDao.findByUsername(username);
 	}
 	
-	public boolean register(User u) {
+	public User register(User u) {
 		userDao = ac.getBean(IUserDAO.class);
 		
 		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
 		u.setPassword(hashed);
 		
-		return userDao.insert(u);
+		int id = userDao.insert(u);
+		if (id != 0) {
+			u.setId(id);
+			return userDao.update(u);
+		}
+		
+		return null;
 	}
 	
-	public boolean update(User u) {
+	public User update(User u) {
 		userDao = ac.getBean(IUserDAO.class);
 		
 		return userDao.update(u);
