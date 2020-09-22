@@ -12,7 +12,7 @@ public interface IMealDAO {
 	public Meal findById(int id);
 	public List<Meal> findByDate(LocalDateTime date);
 	public List<Meal> findByUser(User u);
-	public boolean insert(Meal m);
-	public boolean update(Meal m);
+	public int insert(Meal m);
+	public Meal update(Meal m);
 	public void delete(Meal m);
 }

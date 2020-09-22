@@ -8,7 +8,7 @@ public interface IUserDAO {
 	public List<User> allUsers();
 	public User findById(int id);
 	public User findByUsername(String username);
-	public boolean insert(User u);
-	public boolean update(User u);
+	public int insert(User u);
+	public User update(User u);
 	public void delete(User u);
 }

@@ -66,7 +66,7 @@ public class FoodDAO implements IFoodDAO {
 	}
 
 	@Override
-	public boolean insert(Food f) {
+	public int insert(Food f) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -74,15 +74,15 @@ public class FoodDAO implements IFoodDAO {
 		
 		if (id != 0) {
 			tx.commit();
-			return true;
+			return id;
 		}
 		
 		tx.rollback();
-		return false;
+		return id;
 	}
 
 	@Override
-	public boolean update(Food f) {
+	public Food update(Food f) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -90,11 +90,11 @@ public class FoodDAO implements IFoodDAO {
 		
 		if (updated.equals(f)) {
 			tx.commit();
-			return true;
+			return updated;
 		}
 		
 		tx.rollback();
-		return false;
+		return null;
 	}
 
 	@Override

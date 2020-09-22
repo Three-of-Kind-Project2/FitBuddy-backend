@@ -10,7 +10,7 @@ public interface IFoodDAO {
 	public List<Food> allFood();
 	public Food findById(int id);
 	public List<Food> findByMeal(Meal m);
-	public boolean insert(Food f);
-	public boolean update(Food f);
+	public int insert(Food f);
+	public Food update(Food f);
 	public void delete(Food f);
 }

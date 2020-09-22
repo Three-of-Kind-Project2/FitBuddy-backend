@@ -63,7 +63,7 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public boolean insert(User u) {
+	public int insert(User u) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -71,15 +71,15 @@ public class UserDAO implements IUserDAO {
 		
 		if (id != 0) {
 			tx.commit();
-			return true;
+			return id;
 		}
 		
 		tx.rollback();
-		return false;
+		return id;
 	}
 
 	@Override
-	public boolean update(User u) {
+	public User update(User u) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -87,11 +87,11 @@ public class UserDAO implements IUserDAO {
 		
 		if (updated.equals(u)) {
 			tx.commit();
-			return true;
+			return updated;
 		}
 		
 		tx.rollback();
-		return false;
+		return null;
 	}
 
 	@Override

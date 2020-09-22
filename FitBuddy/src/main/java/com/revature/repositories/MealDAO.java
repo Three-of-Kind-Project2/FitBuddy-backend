@@ -85,7 +85,7 @@ public class MealDAO implements IMealDAO {
 	}
 	
 	@Override
-	public boolean insert(Meal m) {
+	public int insert(Meal m) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -93,15 +93,15 @@ public class MealDAO implements IMealDAO {
 		
 		if (id != 0) {
 			tx.commit();
-			return true;
+			return id;
 		}
 		
 		tx.rollback();
-		return false;
+		return id;
 	}
 
 	@Override
-	public boolean update(Meal m) {
+	public Meal update(Meal m) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
@@ -109,11 +109,11 @@ public class MealDAO implements IMealDAO {
 		
 		if (updated.equals(m)) {
 			tx.commit();
-			return true;
+			return updated;
 		}
 		
 		tx.rollback();
-		return false;
+		return null;
 	}
 
 	@Override
