@@ -15,6 +15,7 @@ public class UserService {
 	
 	@Autowired
 	private IUserDAO userDao;
+	
 	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	
 	public List<User> getAllUsers() {
