@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -38,7 +39,10 @@ public class UserService {
 	
 	public boolean register(User u) {
 		userDao = ac.getBean(IUserDAO.class);
-		//TODO: hash password before insertion
+		
+		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+		u.setPassword(hashed);
+		
 		return userDao.insert(u);
 	}
 	

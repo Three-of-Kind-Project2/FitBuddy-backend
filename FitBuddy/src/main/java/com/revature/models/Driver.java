@@ -2,12 +2,15 @@ package com.revature.models;
 
 import java.time.LocalDateTime;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.revature.repositories.FoodDAO;
 import com.revature.repositories.IFoodDAO;
 import com.revature.repositories.IMealDAO;
 import com.revature.repositories.IUserDAO;
 import com.revature.repositories.MealDAO;
 import com.revature.repositories.UserDAO;
+import com.revature.services.UserService;
 
 public class Driver {
 
@@ -35,6 +38,18 @@ public class Driver {
 		
 		System.out.println(foodDao.findByMeal(m1));
 		
+		UserService userServ = new UserService();
+		
+		User test2 = new User(0, "test2", "test2", "Test2", "Test2", "test2@mail.com", 2100);
+		userServ.register(test2);
+		
+		System.out.println(userServ.findUser("test2"));
+		
+		if (BCrypt.checkpw("test2", userServ.findUser("test2").getPassword())) {
+			System.out.println("pws match");
+		} else {
+			System.out.println("no match");
+		}
 	}
 
 }
