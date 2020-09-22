@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -15,6 +17,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.models.Meal;
+import com.revature.models.User;
 import com.revature.util.HibernateUtil;
 
 @Repository
@@ -62,20 +65,23 @@ public class MealDAO implements IMealDAO {
 	}
 
 	@Override
-	public List<Meal> findByUser(int userId) {
+	public List<Meal> findByUser(User u) {
+		List<Meal> meals = null;
+		
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
 		
 		CriteriaBuilder builder = s.getCriteriaBuilder();
 		CriteriaQuery<Meal> query = builder.createQuery(Meal.class);
-		Root<Meal> root = query.from(Meal.class);
 		
-		Predicate restriction = builder.and(builder.like(root.get("id"), Integer.toString(userId)));
-		query.select(root).where(restriction);
-		TypedQuery<Meal> m = s.createQuery(query);
+		Root<Meal> root = query.from(Meal.class);
+		Join<Meal, User> join = root.join("user", JoinType.INNER);
+		query.select(root).where(builder.equal(join.get("id"), u.getId()));
+		
+		meals = s.createQuery(query).getResultStream().collect(Collectors.toList());
 		
 		tx.commit();
-		return m.getResultList();
+		return meals;
 	}
 	
 	@Override

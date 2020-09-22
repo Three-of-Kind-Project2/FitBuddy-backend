@@ -1,14 +1,14 @@
 package com.revature.models;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,14 +40,15 @@ public class Food implements Serializable {
 	@Column
 	private int fat;
 	
-	@ManyToMany(mappedBy = "foods")
-	private Set<Meal> meals;
+	@ManyToOne
+	@JoinColumn(name = "meal")
+	private Meal meal;
 	
 	public Food() {
 		super();
 	}
 
-	public Food(int food_id, String name, String url, int calories, int carbs, int protein, int fat) {
+	public Food(int food_id, String name, String url, int calories, int carbs, int protein, int fat, Meal meal) {
 		super();
 		this.food_id = food_id;
 		this.name = name;
@@ -56,6 +57,7 @@ public class Food implements Serializable {
 		this.carbs = carbs;
 		this.protein = protein;
 		this.fat = fat;
+		this.meal = meal;
 	}
 
 	public int getId() {
@@ -113,6 +115,14 @@ public class Food implements Serializable {
 	public void setFat(int fat) {
 		this.fat = fat;
 	}
+	
+	public Meal getMeal() {
+		return meal;
+	}
+	
+	public void setMeal(Meal meal) {
+		this.meal = meal;
+	}
 
 	@Override
 	public int hashCode() {
@@ -122,6 +132,7 @@ public class Food implements Serializable {
 		result = prime * result + carbs;
 		result = prime * result + fat;
 		result = prime * result + food_id;
+		result = prime * result + ((meal == null) ? 0 : meal.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + protein;
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -145,6 +156,11 @@ public class Food implements Serializable {
 			return false;
 		if (food_id != other.food_id)
 			return false;
+		if (meal == null) {
+			if (other.meal != null)
+				return false;
+		} else if (!meal.equals(other.meal))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -163,7 +179,7 @@ public class Food implements Serializable {
 	@Override
 	public String toString() {
 		return "Food [food_id=" + food_id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs=" + carbs
-				+ ", protein=" + protein + ", fat=" + fat + "]";
+				+ ", protein=" + protein + ", fat=" + fat + ", meal=" + meal + "]";
 	}
 	
 }
