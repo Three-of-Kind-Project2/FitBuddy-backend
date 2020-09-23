@@ -11,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+@Component
 @Entity
 @Table(name = "users", schema = "fitbuddy")
 public class User implements Serializable {
@@ -41,7 +45,7 @@ public class User implements Serializable {
 	@Column
 	private int goal;
 	
-	@JsonManagedReference("meal-user")
+	@JsonBackReference("meal-user")
 	@OneToMany(mappedBy = "user")
 	private Set<Meal> meals;
 	

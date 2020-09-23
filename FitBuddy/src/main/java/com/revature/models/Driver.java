@@ -41,15 +41,15 @@ public class Driver {
 		UserService userServ = new UserService();
 		
 		User test2 = new User(0, "test2", "test2", "Test2", "Test2", "test2@mail.com", 2100);
-		userServ.register(test2);
+//		userServ.register(test2);
 		
-		System.out.println(userServ.findUser("test2"));
-		
-		if (BCrypt.checkpw("test2", userServ.findUser("test2").getPassword())) {
-			System.out.println("pws match");
-		} else {
-			System.out.println("no match");
-		}
+//		System.out.println(userServ.findUser("test2"));
+//		
+//		if (BCrypt.checkpw("test2", userServ.findUser("test2").getPassword())) {
+//			System.out.println("pws match");
+//		} else {
+//			System.out.println("no match");
+//		}
 	}
 
 }

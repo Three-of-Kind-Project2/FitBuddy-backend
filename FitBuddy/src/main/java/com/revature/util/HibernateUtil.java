@@ -36,7 +36,7 @@ public class HibernateUtil {
 		cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
 		cfg.setProperty("hibernate.show_sql", "true");
 		cfg.setProperty("hibernate.format_sql", "true");
-		cfg.setProperty("hibernate.hbm2ddl.auto", "create");
+		cfg.setProperty("hibernate.hbm2ddl.auto", "update");
 		
 		// Mapping the class to look for its annotations.
 		cfg.addAnnotatedClass(User.class);

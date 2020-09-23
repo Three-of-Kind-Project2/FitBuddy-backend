@@ -17,50 +17,37 @@ public class UserService {
 	@Autowired
 	private IUserDAO userDao;
 	
-	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-	
 	public List<User> getAllUsers() {
-		userDao = ac.getBean(IUserDAO.class);
-		
 		return userDao.allUsers();
 	}
 	
 	public User findUser(int id) {
-		userDao = ac.getBean(IUserDAO.class);
-		
 		return userDao.findById(id);
 	}
 	
-	public User findUser(String username) {
-		userDao = ac.getBean(IUserDAO.class);
-		
-		return userDao.findByUsername(username);
-	}
+//	public User findUser(String username) {
+//		
+//		return userDao.findByUsername(username);
+//	}
 	
-	public User register(User u) {
-		userDao = ac.getBean(IUserDAO.class);
-		
-		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
-		u.setPassword(hashed);
-		
-		int id = userDao.insert(u);
-		if (id != 0) {
-			u.setId(id);
-			return userDao.update(u);
-		}
-		
-		return null;
-	}
+//	public User register(User u) {
+//		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+//		u.setPassword(hashed);
+//		
+//		int id = userDao.insert(u);
+//		if (id != 0) {
+//			u.setId(id);
+//			return userDao.update(u);
+//		}
+//		
+//		return null;
+//	}
 	
 	public User update(User u) {
-		userDao = ac.getBean(IUserDAO.class);
-		
 		return userDao.update(u);
 	}
 	
 	public void delete(User u) {
-		userDao = ac.getBean(IUserDAO.class);
-		
 		userDao.delete(u);
 	}
 }

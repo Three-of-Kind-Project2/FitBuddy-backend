@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.io.Serializable;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -15,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+@Component
 @Entity
 @Table(name = "meal", schema = "fitbuddy")
 public class Meal implements Serializable {
@@ -40,8 +43,8 @@ public class Meal implements Serializable {
 	@JoinColumn(name = "id")
 	private User user;
 	
-	@JsonManagedReference("meal-food")
-	@OneToMany(mappedBy = "meal", fetch = FetchType.EAGER)
+	@JsonBackReference("meal-food")
+	@OneToMany(mappedBy = "meal", fetch = FetchType.LAZY)
 	private Set<Food> foods;
 	
 	public Meal() {
