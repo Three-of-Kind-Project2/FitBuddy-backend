@@ -25,6 +25,9 @@ public class UserService {
 		return userDao.findById(id);
 	}
 	
+	public int insertUser(User u) {
+		return userDao.insert(u);
+	}
 //	public User findUser(String username) {
 //		
 //		return userDao.findByUsername(username);
