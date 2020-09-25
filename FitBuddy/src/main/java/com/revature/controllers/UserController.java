@@ -19,8 +19,6 @@ import com.revature.models.User;
 import com.revature.services.UserService;
 
 @RestController
-@RequestMapping("users")
-@CrossOrigin("http://localhost:4200")
 public class UserController {
 	
 	@Autowired
@@ -31,11 +29,24 @@ public class UserController {
 		return ResponseEntity.ok(this.userServ.getAllUsers());
 	}
 	
-//	@PostMapping
-//	public ResponseEntity<User> login(@RequestBody LoginDTO loginDto) {
-//		return ResponseEntity.ok();
-//	}
+	@CrossOrigin("http://localhost:4200")
+	@RequestMapping("login")
+	@PostMapping
+	public ResponseEntity<User> login(@RequestBody LoginDTO loginDto) {
+		System.out.println("Username input from the frontend: " + loginDto.getUsername());
+		System.out.println("Password input from the frontend: " + loginDto.getPassword());
+        if(loginDto.getUsername() == null || loginDto.getPassword() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+		User retUser = this.userServ.login(loginDto.getUsername(), loginDto.getPassword());
+		
+		System.out.println("Returned user from the login method: " + retUser);
+		return ResponseEntity.ok(retUser);
+	}
 	
+	@CrossOrigin("http://localhost:4200")
+	@RequestMapping("users")
 	@PostMapping
 	public ResponseEntity<List<User>> insert(@RequestBody AddUserDTO userDto) {
 		User u = new User(userDto.getId(), userDto.getUsername(), 
