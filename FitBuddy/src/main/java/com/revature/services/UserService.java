@@ -35,11 +35,11 @@ public class UserService {
 	public User register(User u) {
 		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
 		u.setPassword(hashed);
-		
 		int id = userDao.insert(u);
 		if (id != 0) {
 			u.setId(id);
 			return userDao.update(u);
+			
 		}
 		
 		return null;
