@@ -39,7 +39,6 @@ public class UserService {
 		if (id != 0) {
 			u.setId(id);
 			return userDao.update(u);
-			
 		}
 		
 		return null;

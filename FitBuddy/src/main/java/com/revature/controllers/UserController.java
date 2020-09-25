@@ -30,11 +30,10 @@ public class UserController {
 	public ResponseEntity<List<User>> allUsers() {
 		return ResponseEntity.ok(this.userServ.getAllUsers());
 	}
-//set up for sign in 	
+	
 //	@PostMapping
 //	public ResponseEntity<User> login(@RequestBody LoginDTO loginDto) {
-		
-// use this for sign in		return ResponseEntity.ok();
+//		return ResponseEntity.ok();
 //	}
 	
 	@PostMapping
@@ -49,7 +48,7 @@ public class UserController {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		this.userServ.insertUser(u);
+		this.userServ.register(u);
 		
 		if(u.getId() == 0) {
 			// Failed to properly save

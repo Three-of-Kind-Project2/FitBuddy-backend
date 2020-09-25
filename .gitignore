@@ -6,6 +6,7 @@
 target/
 FitBuddy/target/
 bin/
+Servers/
 
 # Compiled class file
 *.class
