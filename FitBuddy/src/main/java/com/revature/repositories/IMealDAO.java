@@ -8,11 +8,11 @@ import com.revature.models.User;
 
 public interface IMealDAO {
 
-	public List<Meal> allMeals();
-	public Meal findById(int id);
-	public List<Meal> findByDate(LocalDateTime date);
-	public List<Meal> findByUser(User u);
-	public int insert(Meal m);
-	public Meal update(Meal m);
-	public void delete(Meal m);
+//	public List<Meal> allMeals();
+//	public Meal findById(int id);
+//	public List<Meal> findByDate(LocalDateTime date);
+//	public List<Meal> findByUser(User u);
+//	public int insert(Meal m);
+//	public Meal update(Meal m);
+//	public void delete(Meal m);
 }
