@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.AddUserDTO;
@@ -49,9 +48,9 @@ public class UserController {
 	@RequestMapping("users")
 	@PostMapping
 	public ResponseEntity<List<User>> insert(@RequestBody AddUserDTO userDto) {
-		User u = new User(userDto.getId(), userDto.getUsername(), 
-				userDto.getPassword(), userDto.getFirstname(), 
-				userDto.getLastname(), userDto.getEmail(),
+		User u = new User(userDto.getId(), userDto.getFirstname(), 
+				userDto.getLastname(), userDto.getUsername(), 
+				userDto.getPassword(), userDto.getEmail(),
 				userDto.getGoal());
 		
 		System.out.println("Here!");
