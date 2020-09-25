@@ -36,7 +36,8 @@ public class LogController {
 	
 	@PostMapping
 	public ResponseEntity<List<Meal>> addFood(@RequestBody FoodDTO f) {
-		Meal meal = mealServ.findMeal(f.getMeal_id());
+//		Meal meal = mealServ.findMeal(f.getMeal_id());
+		Meal meal = null;
 		Food food = new Food(f.getFood_id(), f.getName(), f.getUrl(), f.getCalories(), f.getCarbs(), 
 				f.getProtein(), f.getFat(), meal);
 		
@@ -50,7 +51,7 @@ public class LogController {
 			// could not save properly
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		
-		return ResponseEntity.ok(this.mealServ.mealsByUser(meal.getUser()));
+//		this.mealServ.mealsByUser(meal.getUser())
+		return ResponseEntity.ok().build();
 	}
 }
