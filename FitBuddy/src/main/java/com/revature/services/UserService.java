@@ -53,13 +53,19 @@ public class UserService {
 	
 	public User login(String username, String password) {
 		User u = findUser(username);
+		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 		System.out.println(u);
 		if (u != null) {
-			
-			if (BCrypt.checkpw(password, u.getPassword())) {
+			System.out.println(hashed);
+			System.out.println(u.getPassword());
+			if (hashed.equals(u.getPassword())) {
 				System.out.println("Password matches!");
 				return u;
 			}
+//			if (BCrypt.checkpw(password, u.getPassword())) {
+//				System.out.println("Password matches!");
+//				return u;
+//			}
 		}
 		return null;
 	}
