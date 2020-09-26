@@ -39,7 +39,6 @@ public class UserService {
 			u.setId(id);
 			return userDao.update(u);
 		}
-		
 		return null;
 	}
 	

@@ -39,8 +39,7 @@ public class LogController {
 
 	@PostMapping
 	public ResponseEntity<List<Meal>> addFood(@RequestBody FoodDTO f) {
-//		Meal meal = mealServ.findMeal(f.getMeal_id());
-		Meal meal = null;
+		Meal meal = mealServ.findMeal(f.getMeal_id());
 		Food food = new Food(f.getFood_id(), f.getName(), f.getUrl(), f.getCalories(), f.getCarbs(), 
 				f.getProtein(), f.getFat(), meal);
 		

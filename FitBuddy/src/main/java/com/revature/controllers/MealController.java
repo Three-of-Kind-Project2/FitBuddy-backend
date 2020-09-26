@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +32,21 @@ public class MealController {
 	
 	@PostMapping
 	public ResponseEntity<List<Meal>> addMeal(@RequestBody MealDTO m) {
-		
 		Meal meal = new Meal(m.getId(), LocalDateTime.now(), m.getType(), userServ.findUser(m.getUserid()));
 		
 		if (meal.getId() != 0) {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		this.mealServ.insert(meal);
+		Meal newMeal = this.mealServ.insert(meal);
+		System.out.println(newMeal);
+		List<Meal> mealList = new ArrayList<Meal>();
+		mealList.add(newMeal);
 		
 		if (meal.getId() == 0) {
 			// could not save properly
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-//		this.mealServ.mealsByUser(meal.getUser())
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(mealList);
 	}
 }

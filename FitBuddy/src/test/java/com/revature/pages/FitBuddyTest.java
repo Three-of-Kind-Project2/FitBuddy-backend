@@ -1,3 +1,4 @@
+
 package com.revature.pages;
 
 import org.testng.annotations.Test;
@@ -9,6 +10,8 @@ import java.io.File;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 
 public class FitBuddyTest {
@@ -27,20 +30,32 @@ public class FitBuddyTest {
   }
 
   @AfterClass
+  // close automation for test
   public void afterClass() {
   driver.quit(); 
   }
   
   @Test
   public void confirmHomePage() {
-	  FitBuddyLogin fl = new FitBuddyLogin(driver); 
-	  assertEquals(driver.getTitle(), fl.title);
+	
+	  assertEquals(driver.getTitle(), FitBuddyHome.title);
   }
   
-  @Test
+  @Test(dependsOnMethods = {"confirmHomePage"}, timeOut = 5000)
   public void loginWorks() {
-	  FitBuddyLogin fl = new FitBuddyLogin(driver);
-	  fl.loginToFitBuddyLogin("pranavuday", "password");
+	  FitBuddyHome fbh = new FitBuddyHome(driver);
+	 
+	  // Instantiate corresponding pages
+	  fbh.loginToFitBuddyLogin("pranavtest", "test");
+	  // Login
+	  FitBuddyLogin fbl = new FitBuddyLogin(driver);
+	  // Obtain other page 
+	  // Wait for it to be visible 
+	  WebDriverWait wait = new WebDriverWait(driver, 50); 
+	  wait.until(ExpectedConditions.visibilityOf(fbl.header)); 
+	  
+	  // Make assertion makes sure you can log in a
+	  assertEquals(driver.getTitle(),FitBuddyLogin.title); 
   }
   
   

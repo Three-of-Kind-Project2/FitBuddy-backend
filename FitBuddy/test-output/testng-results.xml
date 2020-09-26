@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2020-09-26T14:41:25 EDT" name="Default suite" finished-at="2020-09-26T14:41:33 EDT" duration-ms="8163">
+    <groups>
+    </groups>
+    <test started-at="2020-09-26T14:41:25 EDT" name="Default test" finished-at="2020-09-26T14:41:33 EDT" duration-ms="8163">
+      <class name="com.revature.pages.FitBuddyTest">
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:com.revature.pages.FitBuddyTest@5cee5251]" started-at="2020-09-26T14:41:25 EDT" name="beforeClass" finished-at="2020-09-26T14:41:30 EDT" duration-ms="5236" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="confirmHomePage()[pri:0, instance:com.revature.pages.FitBuddyTest@5cee5251]" started-at="2020-09-26T14:41:30 EDT" name="confirmHomePage" finished-at="2020-09-26T14:41:30 EDT" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- confirmHomePage -->
+        <test-method signature="f()[pri:0, instance:com.revature.pages.FitBuddyTest@5cee5251]" started-at="2020-09-26T14:41:30 EDT" name="f" finished-at="2020-09-26T14:41:30 EDT" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- f -->
+        <test-method signature="loginWorks()[pri:0, instance:com.revature.pages.FitBuddyTest@5cee5251]" started-at="2020-09-26T14:41:30 EDT" name="loginWorks" finished-at="2020-09-26T14:41:32 EDT" depends-on-methods="com.revature.pages.FitBuddyTest.confirmHomePage" duration-ms="1731" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginWorks -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:com.revature.pages.FitBuddyTest@5cee5251]" started-at="2020-09-26T14:41:32 EDT" name="afterClass" finished-at="2020-09-26T14:41:33 EDT" duration-ms="1117" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.revature.pages.FitBuddyTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

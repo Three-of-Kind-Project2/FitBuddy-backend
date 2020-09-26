@@ -70,7 +70,9 @@ public class MealService {
 		
 		if (id != 0) {
 			m.setId(id);
-			return update(m);
+			update(m);
+			System.out.println(m);
+			return m;
 		}
 		return null;
 	}
