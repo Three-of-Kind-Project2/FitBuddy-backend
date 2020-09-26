@@ -32,15 +32,12 @@ public class UserController {
 	@RequestMapping("login")
 	@PostMapping
 	public ResponseEntity<User> login(@RequestBody LoginDTO loginDto) {
-		System.out.println("Username input from the frontend: " + loginDto.getUsername());
-		System.out.println("Password input from the frontend: " + loginDto.getPassword());
         if(loginDto.getUsername() == null || loginDto.getPassword() == null) {
             return ResponseEntity.badRequest().build();
         }
 
 		User retUser = this.userServ.login(loginDto.getUsername(), loginDto.getPassword());
 		
-		System.out.println("Returned user from the login method: " + retUser);
 		return ResponseEntity.ok(retUser);
 	}
 	
@@ -53,7 +50,6 @@ public class UserController {
 				userDto.getPassword(), userDto.getEmail(),
 				userDto.getGoal());
 		
-		System.out.println("Here!");
 		if(u.getId() != 0) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -66,5 +62,23 @@ public class UserController {
 		}
 		
 		return ResponseEntity.ok(this.userServ.getAllUsers());
+	}
+	
+	@CrossOrigin("http://localhost:4200")
+	@RequestMapping("update")
+	@PostMapping
+	public ResponseEntity<User> update(@RequestBody AddUserDTO userDto) {
+		User u = new User(userDto.getId(), userDto.getFirstname(), 
+				userDto.getLastname(), userDto.getUsername(), 
+				userDto.getPassword(), userDto.getEmail(),
+				userDto.getGoal());
+		
+		User updated = this.userServ.update(u);
+		
+		if (updated == null) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		
+		return ResponseEntity.ok(updated);
 	}
 }
