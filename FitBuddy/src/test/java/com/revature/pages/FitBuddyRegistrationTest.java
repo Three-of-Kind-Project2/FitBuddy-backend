@@ -15,17 +15,29 @@ import org.testng.annotations.AfterClass;
 
 public class FitBuddyRegistrationTest {
 	public static WebDriver driver; 
-	public final String url = "http://localhost:4200/registration";
+	public final String url = "http://localhost:4200/";
  
   @BeforeClass
   public void beforeClass() {
-	 //this file path works with Linux
-	  File file = new File("src/main/resources/chromedriver");
-	    //Commented out for windows
-	//  File file = new File("src/main/resources/chromedriver.exe");
+	  String filepath = "src/test/resources/";
+	  String os = System.getProperty("os.name").substring(0, 3);
+	  
+	  switch (os) {
+	  	case "Win":
+	  		filepath += ("chromedriver_windows.exe");
+	  		break;
+	  	case "Mac":
+	  		filepath += ("chromedriver_mac");
+	  		break;
+	  	case "Lin":
+	  		filepath += ("chromedriver_linux");
+	  		break;
+	  }
+	  
+	  File file = new File(filepath);
 	  System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
-	  this.driver = new ChromeDriver(); 
-	  driver.get(url); 
+	  driver = new ChromeDriver(); 
+	  driver.get(url + "registration"); 
   }
 
   @AfterClass
@@ -44,12 +56,10 @@ public class FitBuddyRegistrationTest {
 	  FitBuddyHomeTwo fbh = new FitBuddyHomeTwo(driver);
 		 
 	  // Instantiate corresponding pages
-	  fbh.registerToFitBuddyRegistration("John", "Doe", "Test1", "Test", "Test", "test1@gmail.com", "100");
-	  
-	  FitBuddyRegistration fbr = new FitBuddyRegistration(driver);
-	  
+	  fbh.registerToFitBuddyRegistration("Test", "Test", "test", "test", "test", "test@email.com", "1500");
+	  	  
 	  WebDriverWait wait = new WebDriverWait(driver, 50); 
-	  wait.until(ExpectedConditions.visibilityOf(fbr.headerTwo)); 
+	  wait.until(ExpectedConditions.urlToBe(url + "login")); 
 	  
 	  // Make assertion makes sure you can log in a
 	  assertEquals(driver.getTitle(),FitBuddyRegistration.title); 
