@@ -1,5 +1,8 @@
 package com.revature.services;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
@@ -67,6 +70,13 @@ public class MealServiceTest {
 	}
 	
 	@Test
+	public void testFindMealByIdFailure() {
+		when(mealDao.findById(1)).thenReturn(null);
+		
+		assertNull(mealServ.findMeal(1));
+	}
+	
+	@Test
 	public void testMealsByUserObj() {
 		Meal lunch = new Meal(1, date, "Lunch", test);
 		Meal dinner = new Meal(2, date, "Dinner", test);
@@ -76,6 +86,13 @@ public class MealServiceTest {
 		
 		when(mealDao.findByUser(test)).thenReturn(meals);
 		assertEquals(mealServ.mealsByUser(test), meals);
+	}
+	
+	@Test
+	public void testMealsByUserObjFailure() {
+		when(mealDao.findByUser(test)).thenReturn(null);
+		
+		assertNull(mealServ.mealsByUser(test));
 	}
 	
 	@Test
@@ -93,6 +110,13 @@ public class MealServiceTest {
 	}
 	
 	@Test
+	public void testMealsByUserIdFailure() {
+		when(userDao.findById(1)).thenReturn(null);
+		
+		assertNull(mealServ.mealsByUser(1));
+	}
+	
+	@Test
 	public void testGetAllMeals() {
 		Meal lunch = new Meal(1, date, "Lunch", test);
 		Meal dinner = new Meal(2, date, "Dinner", test);
@@ -103,6 +127,31 @@ public class MealServiceTest {
 		when(mealDao.allMeals()).thenReturn(meals);
 		
 		assertEquals(mealServ.getAllMeals(), meals);
+	}
+	
+	@Test
+	public void testNoNullUsers() {
+		Meal breakfast = new Meal(1, date, "Breakfast", test);
+		Meal lunch = new Meal(1, date, "Lunch", test);
+		Meal dinner = new Meal(2, date, "Dinner", test);
+		List<Meal> meals = new ArrayList<>();
+		meals.add(breakfast);
+		meals.add(lunch);
+		meals.add(dinner);
+		
+		when(mealDao.allMeals()).thenReturn(meals);
+		
+		List<Meal> result = mealDao.allMeals();
+		
+		for (Meal m : result) {
+			assertNotNull(m.getUser());
+		}
+	}
+	
+	@Test
+	public void testNoMealsFound() {
+		when(mealDao.allMeals()).thenReturn(null);
+		assertNull(mealDao.allMeals());
 	}
 	
 	@Test
@@ -147,24 +196,55 @@ public class MealServiceTest {
 		assertEquals(mealServ.newMeal(lunch, test).getUser(), test);
 	}
 	
-//	@Test
-//	public void testNewMealWUserObjectFailure() {
-//		Meal lunch = new Meal(0, date, "Lunch", null);
-//		Meal lunchWUser = new Meal(1, date, "Lunch", test);
-//		
-//		when(mealDao.update(lunch)).thenReturn(lunchWUser);
-//		
-//		assertEquals(mealServ.newMeal(lunch, test).getUser(), test);
-//	}
-//	
-//	@Test
-//	public void testNewMealWUserId() {
-//		Meal lunch = new Meal(0, date, "Lunch", null);
-//		Meal lunchWUser = new Meal(0, date, "Lunch", test);
-//		
-//		when(mealDao.update(lunch)).thenReturn(lunchWUser);
-//		
-//		assertEquals(mealServ.newMeal(lunch, 1).getUser(), test);
-//	}
+	@Test
+	public void testNewMealWUserObjectFailure() {
+		Meal lunch = new Meal(0, date, "Lunch", null);
+		
+		when(mealDao.update(lunch)).thenReturn(null);
+		
+		assertNull(mealServ.newMeal(lunch, test));
+	}
+	
+	@Test
+	public void testNewMealWUserId() {
+		Meal lunch = new Meal(0, date, "Lunch", null);
+		Meal lunchWUser = new Meal(0, date, "Lunch", test);
+		
+		when(mealDao.update(lunch)).thenReturn(lunchWUser);
+		when(userDao.findById(1)).thenReturn(test);
+		
+		assertEquals(mealServ.newMeal(lunch, 1).getUser(), test);
+	}
+	
+	@Test
+	public void testNewMealWUserIdFailure() {
+		Meal lunch = new Meal(0, date, "Lunch", null);
+		
+		when(mealDao.update(lunch)).thenReturn(null);
+		when(userDao.findById(1)).thenReturn(null);
+		
+		assertNull(mealServ.newMeal(lunch, 1));
+	}
+	
+	@Test
+	public void testNewMealWMealObjSuccess() {
+		Meal lunch = new Meal(0, date, "Lunch", null);
+		Meal newLunch = new Meal(1, date, "Lunch", null);
+		
+		when(mealDao.insert(lunch)).thenReturn(1);
+		when(mealDao.update(lunch)).thenReturn(newLunch);
+		
+		assertEquals(mealServ.newMeal(lunch), newLunch);
+	}
+	
+	@Test
+	public void testNewMealWMealObjFailure() {
+		Meal lunch = new Meal(0, date, "Lunch", null);
+		
+		when(mealDao.insert(lunch)).thenReturn(0);
+		when(mealDao.update(lunch)).thenReturn(null);
+		
+		assertNull(mealServ.newMeal(lunch));
+	}
 
 }
