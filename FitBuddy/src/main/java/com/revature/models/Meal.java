@@ -43,7 +43,7 @@ public class Meal implements Serializable {
 	@JoinColumn(name = "id")
 	private User user;
 	
-	@JsonBackReference("meal-food")
+	@JsonManagedReference("meal-food")
 	@OneToMany(mappedBy = "meal", fetch = FetchType.LAZY)
 	private Set<Food> foods;
 	

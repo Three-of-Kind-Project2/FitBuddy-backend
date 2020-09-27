@@ -31,11 +31,15 @@ public class LogController {
 	FoodService foodServ;
 	
 
-	@GetMapping
-	public ResponseEntity<List<Meal>> getMeals(int user_id) {
-		return ResponseEntity.ok(this.mealServ.mealsByUser(user_id));
-	}
+//	@GetMapping
+//	public ResponseEntity<List<Meal>> getMeals(int user_id) {
+//		return ResponseEntity.ok(this.mealServ.mealsByUser(user_id));
+//	}
 	
+	@GetMapping
+	public ResponseEntity<List<Food>> getFoods() {
+		return ResponseEntity.ok(this.foodServ.getAllFood());
+	}
 
 	@PostMapping
 	public ResponseEntity<List<Meal>> addFood(@RequestBody FoodDTO f) {
@@ -53,6 +57,7 @@ public class LogController {
 			// could not save properly
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+		
 //		this.mealServ.mealsByUser(meal.getUser())
 		return ResponseEntity.ok().build();
 	}
