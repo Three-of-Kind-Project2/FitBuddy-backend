@@ -57,6 +57,8 @@
 				<configuration>
 					<includes>
 						<include>UserServiceTest.java</include>
+						<include>FoodServiceTest.java</include>
+						<include>MealServiceTest.java</include>
 					</includes>
 				</configuration>
 			</plugin>
