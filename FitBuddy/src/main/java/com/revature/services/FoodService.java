@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.models.Food;
 import com.revature.models.Meal;
+import com.revature.models.User;
 import com.revature.repositories.IFoodDAO;
 import com.revature.repositories.IMealDAO;
 
@@ -67,5 +68,18 @@ public class FoodService {
 	
 	public void delete(Food f) {
 		foodDao.delete(f);
+	}
+	
+	public void deleteAllFromUser(User u) {
+		List<Meal> meals = mealDao.findByUser(u);
+		for (Meal m : meals) {
+			List<Food> foods = foodDao.findByMeal(m);
+			if (foods.size() != 0) {
+				for (Food f : foods) {
+					delete(f);
+				}
+			}
+			mealDao.delete(m);
+		}
 	}
 }
