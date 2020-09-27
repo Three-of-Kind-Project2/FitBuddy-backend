@@ -22,6 +22,7 @@ import com.revature.models.MealDTO;
 import com.revature.models.User;
 import com.revature.services.FoodService;
 import com.revature.services.MealService;
+import com.revature.services.UserService;
 
 @RequestMapping("log")
 @CrossOrigin("http://localhost:4200")
@@ -38,8 +39,7 @@ public class LogController {
    public ResponseEntity<List<User>> delete(@RequestBody AddUserDTO u) {
 	  User user = new User(u.getId(), u.getFirstname(), u.getLastname(),
 			  u.getUsername(), u.getPassword(), u.getEmail(), u.getGoal());
-	  System.out.println("here");
-	  System.out.println(user);
+	  foodServ.deleteAllFromUser(user);
       return ResponseEntity.ok().build();
    }
 	
