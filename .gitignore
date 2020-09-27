@@ -9,6 +9,10 @@ bin/
 Servers/
 FitBuddy/.gradle
 FitBuddy/test-output
+FitBuddy/src/test/resources
+FitBuddy/src/test/java/com/revature/pages
+
+
 # Compiled class file
 *.class
 
