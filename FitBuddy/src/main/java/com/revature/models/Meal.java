@@ -38,7 +38,7 @@ public class Meal implements Serializable {
 	@Column
 	private String type;
 	
-	@JsonBackReference("meal-user")
+	@JsonManagedReference("meal-user")
 	@ManyToOne
 	@JoinColumn(name = "id")
 	private User user;
