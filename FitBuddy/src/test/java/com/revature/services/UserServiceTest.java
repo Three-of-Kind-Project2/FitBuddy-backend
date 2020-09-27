@@ -1,11 +1,16 @@
 package com.revature.services;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.revature.models.User;
@@ -22,6 +27,26 @@ public class UserServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
+	}
+	
+	@Test 
+	public void testFindByIdNotNull() {
+		User test = new User(0, "test", "test", "Test", "Test", "test@mail.com", 2000);
+		when(userDao.findById(0)).thenReturn(test);
+		assertNotNull(userServ.findUser(0)); 
+		
+	}
+	
+
+	@Test 
+	public void testInsertUser() {
+		User test = new User(0, "test", "test", "Test", "Test", "test@mail.com", 2000);
+		userDao.insert(test);
+	    assertNotNull(userDao.getClass());
+	    
+ 
+	   
+	   
 	}
 
 	@Test
@@ -62,6 +87,7 @@ public class UserServiceTest {
 		
 		assertEquals(userServ.login("test", "wrongPW"), null);
 	}
+
 	
 	@Test
 	public void testUsernameNotFoundFailure() {
@@ -128,12 +154,43 @@ public class UserServiceTest {
 		User test = new User();
 		assertNotNull(test.getClass());
 	}
+	@Test
+	public void testgetAllUsers() {
+		IUserDAO userDAO = Mockito.mock(IUserDAO.class);
+		UserService userService = Mockito.mock(UserService.class);
+		final List<User> testUser = new ArrayList<>();
+		Mockito.when(userDAO.allUsers()).thenReturn(testUser);
+		assertNotNull(userService.getAllUsers());
+	}
 	
+	@Test
+	public void testfindUsers() {
 	
+		User test = new User(0, "test", "test", "Test", "Test", "test@mail.com", 2000);
+		Mockito.when(userDao.findById(0)).thenReturn(test);  
+		assertNotNull(userServ.findUser(0)); 
+	}
+	
+	@Test 
+	public void testFindByUsername() {
+      
+		User test = new User(0, "Test", "Test", "Test", "Test", "test@mail.com", 2000);
+		when(userDao.findByUsername("Test")).thenReturn(test);  
+		
+	    assertEquals(userServ.findUser("Test"), test); 
+	    
+	}
+	
+   @Test 
+   public void testUpdateUser() {
+	   User test = new User(0, "Test", "Test", "Test", "Test", "test@mail.com", 2000);
+	   when(userDao.update(test)).thenReturn(test); 
+	   assertEquals(userServ.update(test),userDao.update(test));
+       
+	  
+   }
+   
 
+   
 
-	
-	
-	
-	
 }
