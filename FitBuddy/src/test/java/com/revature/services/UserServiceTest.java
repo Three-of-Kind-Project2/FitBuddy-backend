@@ -52,7 +52,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testLoginSuccess() {
-		User test = new User(0, "test", BCrypt.hashpw("test", BCrypt.gensalt()), "Test", "Test", "test@mail.com", 2000);
+		User test = new User(0, "Test", "Test", "test", BCrypt.hashpw("test", BCrypt.gensalt()), "test@mail.com", 2000);
 		when(userDao.findByUsername("test")).thenReturn(test);
 		
 		assertEquals(userServ.login("test", "test"), test);
@@ -60,7 +60,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testIncorrectPasswordFailure() {
-		User test = new User(0, "test", BCrypt.hashpw("test", BCrypt.gensalt()), "Test", "Test", "test@mail.com", 2000);
+		User test = new User(0, "Test", "Test", "test", BCrypt.hashpw("test", BCrypt.gensalt()), "test@mail.com", 2000);
 		when(userDao.findByUsername("test")).thenReturn(test);
 		
 		assertEquals(userServ.login("test", "wrongPW"), null);
@@ -68,7 +68,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testUsernameNotFoundFailure() {
-		User test = new User(0, "test", BCrypt.hashpw("test", BCrypt.gensalt()), "Test", "Test", "test@mail.com", 2000);
+		User test = new User(0, "Test", "Test", "test", BCrypt.hashpw("test", BCrypt.gensalt()), "test@mail.com", 2000);
 		when(userDao.findByUsername("test")).thenReturn(test);
 		
 		assertEquals(userServ.login("wrongUN", "test"), null);
