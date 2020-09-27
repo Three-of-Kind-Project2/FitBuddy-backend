@@ -1,9 +1,6 @@
 package com.revature.services;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
@@ -73,5 +70,70 @@ public class UserServiceTest {
 		
 		assertEquals(userServ.login("wrongUN", "test"), null);
 	}
+	
+	@Test 
+	public void testUserExists() {
+		User test = new User(); 
+		assertNotNull(test); 
+		
+	}
+	
+	@Test 
+	public void testUsernameNull() {
+		User test = new User();
+		assertNull(test.getUsername()); 
+	}
+	
+	@Test 
+	public void testPasswordNull() {
+		User test = new User();
+		assertNull(test.getPassword()); 
+	}
+	
+	
+	@Test
+	public void testIdExists() {
+		User test = new User(); 
+		assertNotNull(test.getId());
+		
+	}
+	
+	@Test
+	public void testGoalExists() {
+		User test = new User(); 
+		assertNotNull(test.getGoal());
+		
+	}
+	
+	@Test
+	public void testEmailNull() {
+		User test = new User();
+		assertNull(test.getEmail());
+	}
+	
+	@Test
+	public void testFirstNameNull() {
+		User test = new User();
+		assertNull(test.getFirstname());
+	}
+	
+	@Test
+	public void testLastNameNull() {
+		User test = new User();
+		assertNull(test.getLastname());
+	}
+	
+	@Test
+	public void testClassExists() {
+		User test = new User();
+		assertNotNull(test.getClass());
+	}
+	
+	
+
+
+	
+	
+	
 	
 }
