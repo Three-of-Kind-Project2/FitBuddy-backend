@@ -141,7 +141,6 @@ public class Food implements Serializable {
 		result = prime * result + carbs;
 		result = prime * result + fat;
 		result = prime * result + food_id;
-		result = prime * result + ((meal == null) ? 0 : meal.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + protein;
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -165,11 +164,6 @@ public class Food implements Serializable {
 			return false;
 		if (food_id != other.food_id)
 			return false;
-		if (meal == null) {
-			if (other.meal != null)
-				return false;
-		} else if (!meal.equals(other.meal))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -187,8 +181,67 @@ public class Food implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Food [food_id=" + food_id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs=" + carbs
-				+ ", protein=" + protein + ", fat=" + fat + ", meal=" + meal + "]";
+		return "Food [food_id=" + food_id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs="
+				+ carbs + ", protein=" + protein + ", fat=" + fat + "]";
 	}
+
 	
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + calories;
+//		result = prime * result + carbs;
+//		result = prime * result + fat;
+//		result = prime * result + food_id;
+//		result = prime * result + ((meal == null) ? 0 : meal.hashCode());
+//		result = prime * result + ((name == null) ? 0 : name.hashCode());
+//		result = prime * result + protein;
+//		result = prime * result + ((url == null) ? 0 : url.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Food other = (Food) obj;
+//		if (calories != other.calories)
+//			return false;
+//		if (carbs != other.carbs)
+//			return false;
+//		if (fat != other.fat)
+//			return false;
+//		if (food_id != other.food_id)
+//			return false;
+//		if (meal == null) {
+//			if (other.meal != null)
+//				return false;
+//		} else if (!meal.equals(other.meal))
+//			return false;
+//		if (name == null) {
+//			if (other.name != null)
+//				return false;
+//		} else if (!name.equals(other.name))
+//			return false;
+//		if (protein != other.protein)
+//			return false;
+//		if (url == null) {
+//			if (other.url != null)
+//				return false;
+//		} else if (!url.equals(other.url))
+//			return false;
+//		return true;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Food [food_id=" + food_id + ", name=" + name + ", url=" + url + ", calories=" + calories + ", carbs=" + carbs
+//				+ ", protein=" + protein + ", fat=" + fat + ", meal=" + meal + "]";
+//	}
+//	
 }
