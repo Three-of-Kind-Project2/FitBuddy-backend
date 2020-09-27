@@ -54,7 +54,7 @@ public class FitBuddyLoginTest {
 	  assertEquals(driver.getTitle(), FitBuddyHome.title);
   }
   
-  @Test(dependsOnMethods = {"confirmHomePage"}, timeOut = 5000)
+  @Test(dependsOnMethods = {"confirmHomePage"}, timeOut = 20000)
   public void loginWorks() {
 	  FitBuddyHome fbh = new FitBuddyHome(driver);
 	 
@@ -62,7 +62,7 @@ public class FitBuddyLoginTest {
 	  fbh.loginToFitBuddyLogin("test", "test");
 	  // Login
 	  // Wait for it to be visible 
-	  WebDriverWait wait = new WebDriverWait(driver, 10); 
+	  WebDriverWait wait = new WebDriverWait(driver, 20); 
 	  wait.until(ExpectedConditions.urlToBe(url + "userhome"));
 	  
 	  // Make assertion makes sure you can log in a
