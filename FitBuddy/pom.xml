@@ -64,6 +64,7 @@
 						<include>FoodDTOTest.java</include>
 						<include>LoginDTOTest.java</include>
 						<include>MealDTOTest.java</include>
+						<include>MealTest.java</include>
 						
 					</includes>
 				</configuration>
