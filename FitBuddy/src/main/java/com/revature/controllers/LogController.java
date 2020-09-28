@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +49,16 @@ public class LogController {
 	public ResponseEntity<List<Food>> getFoods() {
 		return ResponseEntity.ok(this.foodServ.getAllFood());
 	}
-
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<List<Food>> findById(@PathVariable("id") int id) {
+		List<Food> retFood = new ArrayList<>();
+		retFood = foodServ.getFoodByUser(id);
+			
+		return ResponseEntity.ok(retFood);
+	}
+	
+	
 	@PostMapping
 	public ResponseEntity<List<Meal>> addFood(@RequestBody FoodDTO f) {
 		Meal meal = mealServ.findMeal(f.getMeal_id());
