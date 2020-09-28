@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.revature.models.Meal;
 import com.revature.models.User;
 import com.revature.repositories.IFoodDAO;
 import com.revature.repositories.IMealDAO;
+import com.revature.repositories.IUserDAO;
 
 @Service
 public class FoodService {
@@ -20,8 +22,25 @@ public class FoodService {
 	@Autowired
 	private IMealDAO mealDao;
 	
+	@Autowired
+	private IUserDAO userDao;
+	
 	public List<Food> getAllFood() {
 		return foodDao.allFood();
+	}
+	
+	public List<Food> getFoodByUser(int userId) {
+		User u = userDao.findById(userId);
+		List<Meal> meals = mealDao.findByUser(u);
+		List<Food> food = new ArrayList<>();
+		
+		for (Meal m : meals) {
+			List<Food> mealFood = foodByMeal(m);
+			for (Food f : mealFood) {
+				food.add(f);
+			}
+		}
+		return food;
 	}
 	
 	public List<Food> foodByMeal(Meal m) {
