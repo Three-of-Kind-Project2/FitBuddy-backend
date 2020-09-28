@@ -59,6 +59,9 @@
 						<include>UserServiceTest.java</include>
 						<include>FoodServiceTest.java</include>
 						<include>MealServiceTest.java</include>
+						<include>AddUserDTOTest.java</include>
+						<include>FoodTest.java</include>
+						
 					</includes>
 				</configuration>
 			</plugin>
