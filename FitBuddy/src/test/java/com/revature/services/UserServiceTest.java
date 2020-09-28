@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.revature.models.Food;
 import com.revature.models.User;
 import com.revature.repositories.IUserDAO;
 

@@ -1,13 +1,8 @@
 package com.revature.util;
 
-import java.util.Properties;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
-import org.hibernate.service.ServiceRegistry;
 
 import com.revature.models.Food;
 import com.revature.models.Meal;

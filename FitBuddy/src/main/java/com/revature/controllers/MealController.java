@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Meal;
 import com.revature.models.MealDTO;
-import com.revature.models.User;
 import com.revature.services.MealService
 ;
 import com.revature.services.UserService;
@@ -41,7 +39,6 @@ public class MealController {
 		}
 		
 		Meal newMeal = this.mealServ.insert(meal);
-		System.out.println(newMeal);
 		List<Meal> mealList = new ArrayList<Meal>();
 		mealList.add(newMeal);
 		

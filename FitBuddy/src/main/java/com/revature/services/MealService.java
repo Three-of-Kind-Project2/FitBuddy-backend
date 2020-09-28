@@ -71,7 +71,6 @@ public class MealService {
 		if (id != 0) {
 			m.setId(id);
 			update(m);
-			System.out.println(m);
 			return m;
 		}
 		return null;

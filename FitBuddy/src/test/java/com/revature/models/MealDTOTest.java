@@ -3,8 +3,6 @@ package com.revature.models;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDateTime;
-
 import org.junit.Test;
 
 public class MealDTOTest {

@@ -4,26 +4,21 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.revature.models.AddUserDTO;
 import com.revature.models.Food;
 import com.revature.models.Meal;
 import com.revature.models.User;
 import com.revature.repositories.IFoodDAO;
 import com.revature.repositories.IMealDAO;
 import com.revature.repositories.IUserDAO;
-import com.revature.repositories.UserDAO;
 
 public class FoodServiceTest {
 	
@@ -81,7 +76,6 @@ public class FoodServiceTest {
 	
 	@Test
 	public void testFoodByMealIdNull() {
-		User test = new User(0, "Test", "Test", "Test", "Test", "test@mail.com", 2000);
 		Meal meal = new Meal();
 		Food food = new Food(1, "Big-Mac", "www.food.com", 100, 100, 100, 100, meal);
 		List<Food> testFood = new ArrayList<>();
@@ -155,7 +149,6 @@ public class FoodServiceTest {
 	public void testgetFoodByUser() {
 		User test = new User(0, "Test", "Test", "Test", "Test", "test@mail.com", 2000);
 		Meal meal = new Meal(0, date, "Breakfast", test);
-		Food food = new Food(0, "Big-Mac", "www.food.com", 100, 100, 100, 100, meal);
 		List<Meal> meals = new ArrayList<>();
 		meals.add(meal);
 		when(mealDao.findByUser(test)).thenReturn(meals);

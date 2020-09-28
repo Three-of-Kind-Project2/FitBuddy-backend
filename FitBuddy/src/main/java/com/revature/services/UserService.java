@@ -52,10 +52,8 @@ public class UserService {
 	
 	public User login(String username, String password) {
 		User u = findUser(username);
-		System.out.println(u);
 		if (u != null) {
 			if (BCrypt.checkpw(password, u.getPassword())) {
-				System.out.println("Password matches!");
 				return u;
 			}
 		}
