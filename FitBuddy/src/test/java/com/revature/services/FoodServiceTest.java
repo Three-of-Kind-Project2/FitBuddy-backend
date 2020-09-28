@@ -23,6 +23,7 @@ import com.revature.models.User;
 import com.revature.repositories.IFoodDAO;
 import com.revature.repositories.IMealDAO;
 import com.revature.repositories.IUserDAO;
+import com.revature.repositories.UserDAO;
 
 public class FoodServiceTest {
 	
@@ -34,6 +35,8 @@ public class FoodServiceTest {
 	private IFoodDAO foodDao; 
 	@Mock
 	private IMealDAO mealDao; 
+	@Mock
+	private IUserDAO userDao; 
 	
 	private LocalDateTime date = LocalDateTime.now(); 
 	
@@ -146,6 +149,18 @@ public class FoodServiceTest {
 		Food food = new Food(1, "Big-Mac", "www.food.com", 100, 100, 100, 100, meal);
 		when(foodDao.update(food)).thenReturn(food); 
 		assertEquals(foodDao.update(food),foodServ.update(food));
+	}
+	
+	@Test
+	public void testgetFoodByUser() {
+		User test = new User(0, "Test", "Test", "Test", "Test", "test@mail.com", 2000);
+		Meal meal = new Meal(0, date, "Breakfast", test);
+		Food food = new Food(0, "Big-Mac", "www.food.com", 100, 100, 100, 100, meal);
+		List<Meal> meals = new ArrayList<>();
+		meals.add(meal);
+		when(mealDao.findByUser(test)).thenReturn(meals);
+		when(userDao.findById(0)).thenReturn(test); 
+	    assertNotEquals(mealDao.findByUser(test),foodServ.getFoodByUser(0));
 	}
 	
 	@Test 
