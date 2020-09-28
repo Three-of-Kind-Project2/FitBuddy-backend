@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.revature.models.Food;
 import com.revature.models.User;
 import com.revature.repositories.IUserDAO;
 
@@ -105,9 +106,24 @@ public class UserServiceTest {
 	}
 	
 	@Test 
+	public void testSetUsername() {
+		User test = new User(); 
+		test.setUsername("test");
+		assertEquals(test.getUsername(), "test"); 
+	}
+	
+	
+	@Test 
 	public void testUsernameNull() {
 		User test = new User();
 		assertNull(test.getUsername()); 
+	}
+	
+	@Test 
+	public void testSetPassword() {
+		User test = new User(); 
+		test.setPassword("test");
+		assertEquals(test.getPassword(), "test"); 
 	}
 	
 	@Test 
@@ -124,11 +140,25 @@ public class UserServiceTest {
 		
 	}
 	
+	@Test 
+	public void testSetId() {
+		User test = new User(); 
+		test.setId(1);
+		assertEquals(test.getId(), 1); 
+	}
+	
 	@Test
 	public void testGoalExists() {
 		User test = new User(); 
 		assertNotNull(test.getGoal());
 		
+	}
+	
+	@Test 
+	public void testSetGoal() {
+		User test = new User(); 
+		test.setGoal(100);
+		assertEquals(test.getGoal(), 100); 
 	}
 	
 	@Test
@@ -137,16 +167,37 @@ public class UserServiceTest {
 		assertNull(test.getEmail());
 	}
 	
+	@Test 
+	public void testSetEmail() {
+		User test = new User(); 
+		test.setEmail("test@gmail.com");
+		assertEquals(test.getEmail(), "test@gmail.com"); 
+	}
+	
 	@Test
 	public void testFirstNameNull() {
 		User test = new User();
 		assertNull(test.getFirstname());
 	}
 	
+	@Test 
+	public void testSetFirstName() {
+		User test = new User(); 
+		test.setFirstname("test");
+		assertEquals(test.getFirstname(), "test"); 
+	}
+	
 	@Test
 	public void testLastNameNull() {
 		User test = new User();
 		assertNull(test.getLastname());
+	}
+	
+	@Test 
+	public void testSetLastName() {
+		User test = new User(); 
+		test.setLastname("test");
+		assertEquals(test.getLastname(), "test"); 
 	}
 	
 	@Test

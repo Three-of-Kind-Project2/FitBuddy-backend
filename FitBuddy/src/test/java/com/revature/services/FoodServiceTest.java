@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.revature.models.AddUserDTO;
 import com.revature.models.Food;
 import com.revature.models.Meal;
 import com.revature.models.User;
@@ -154,10 +155,25 @@ public class FoodServiceTest {
 		
 	}
 	
+	
+	@Test 
+	public void testSetId() {
+		Food test = new Food(); 
+		test.setId(100);
+		assertEquals(test.getId(),100); 
+	}
+	
 	@Test 
 	public void testNameNull () {
 		Food test = new Food(); 
 		assertNull(test.getName());
+	}
+	
+	@Test 
+	public void testSetName() {
+		Food test = new Food(); 
+		test.setName("Pranav");
+		assertEquals(test.getName(),"Pranav"); 
 	}
 	
 	@Test 
@@ -167,9 +183,23 @@ public class FoodServiceTest {
 	}
 	
 	@Test 
+	public void testSetUrl() {
+		Food test = new Food(); 
+		test.setUrl("www.test.com");
+		assertEquals(test.getUrl(), "www.test.com"); 
+	}
+	
+	@Test 
 	public void testCaloriesNotNull () {
 		Food test = new Food(); 
 		assertNotNull(test.getCalories());
+	}
+	
+	@Test 
+	public void testSetCalories() {
+		Food test = new Food(); 
+		test.setCalories(100);
+		assertEquals(test.getCalories(), 100); 
 	}
 	
 	@Test 
@@ -179,15 +209,38 @@ public class FoodServiceTest {
 	}
 	
 	@Test 
+	public void testSetCarbs() {
+		Food test = new Food(); 
+		test.setCarbs(100);
+		assertEquals(test.getCarbs(), 100); 
+	}
+	
+	
+	@Test 
 	public void testProteinNotNull () {
 		Food test = new Food(); 
 		assertNotNull(test.getProtein());
 	}
 	
 	@Test 
+	public void testSetProtein() {
+		Food test = new Food(); 
+		test.setProtein(100);
+		assertEquals(test.getProtein(), 100); 
+	}
+	
+	
+	@Test 
 	public void testfatNotNull () {
 		Food test = new Food(); 
 		assertNotNull(test.getFat());
+	}
+	
+	@Test 
+	public void testSetFat() {
+		Food test = new Food(); 
+		test.setFat(100);
+		assertEquals(test.getFat(), 100); 
 	}
 	
 		
